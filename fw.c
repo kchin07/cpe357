@@ -15,7 +15,7 @@ hash(unsigned char *str){
 }
 
 unsigned char *temp;
-char **words[3];
+unsigned char *words[3];
 
 int main(int argc, char *argv[]){
     FILE *file; 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
     }
 	if ((file =fopen(argv[1], "r")) == NULL){
 	    perror("Error");
-        exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
 	}
 	char c;
 	while (!feof(file)){
@@ -40,13 +40,13 @@ int main(int argc, char *argv[]){
 				printf("if\n");
 				index = hash(temp);
 				printf("%lu\n", index);
-				printf("%s\n", temp);/*
-				**words[wordCount] = *temp;
-				wordCount++;*/
+				printf("%s\n", temp);
+				*words[wordCount] = *temp;
+				wordCount++;
 				free(temp);
 				letterCounter = 0;
 				temp = malloc(2);
-            	temp = NULL;
+            	                temp = NULL;
 			}
 			else if (c == ' ') {
 				continue;
@@ -60,12 +60,12 @@ int main(int argc, char *argv[]){
 			}
 		
 		}
-    }/*
+    }
 	int i;
 	for (i = 0; i < 3; i++) {
-		printf("%s\n", *words[i]);
+		printf("%s\n", words[i]);
 	}
-	*/
+	
     printf("\nok\n");
     return 0;
 }
