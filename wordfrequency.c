@@ -66,4 +66,10 @@ int main(int argc, char *argv[]){
                 }
     }
         printf("out\n");
-        int i;
+        int i; 
+        for (i - 0; i < 4; i++){
+            printf("%s\n", words[i]);
+        }
+    printf("\nok\n");
+    return 0;
+}
