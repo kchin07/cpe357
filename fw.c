@@ -3,7 +3,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <errno.h>
+<<<<<<< HEAD
 #include <ctype.h>
+=======
+
+>>>>>>> e99bd36e7bbb7ea73e42142da353f5e2e68946ba
 long hash(char *str){
     unsigned long hash = 5381;
     int c;
@@ -109,12 +113,43 @@ int main(int argc, char *argv[]){
 	int sLastArg;
 	int hasn;
 	int isdig;
+<<<<<<< HEAD
 	
 	printFreq = 0;
 	/*checks for file inputs*/
     if (argc < 2) {
 		printf("process file\n");
 		/*TO DO: process file*/
+=======
+    HashTable* MainTable;
+
+	long index;/*unused*/
+    char* temp;
+    char** words;
+    int letterCounter;
+    int wordCount;
+    char c;
+    int multiplier;
+    letterCounter = 0;
+    wordCount = 0;
+    multiplier = 1;
+    temp = (char*)malloc(10*sizeof(char));
+    words = (char**)malloc(4*sizeof(char));	
+	
+	MainTable = ht_create(5);
+	printFreq = 0;
+	/*checks for file inputs*/
+    if (argc < 2) {
+		file = fopen(stdin, "r");/*??????????????????????*/
+		if(file == NULL){
+			perror("Error1");
+			exit(EXIT_FAILURE);
+		}
+		else{
+			printf("process file\n");
+			/*TO DO: process file*/
+		}
+>>>>>>> e99bd36e7bbb7ea73e42142da353f5e2e68946ba
     }
 	else if ((file =fopen(argv[1], "r")) == NULL){
 	    perror("Error");
@@ -146,11 +181,14 @@ int main(int argc, char *argv[]){
 			}
 		}
 	}
+<<<<<<< HEAD
 	
 	/* TO DO: sort*/	
 	if(printFreq == 1){
 		printf("print %d words", printFreqNum);
 		/*TO DO: print n number of words*/
 	}
+=======
+>>>>>>> e99bd36e7bbb7ea73e42142da353f5e2e68946ba
     return 0;
 }
