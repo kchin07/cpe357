@@ -3,11 +3,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <errno.h>
-<<<<<<< HEAD
 #include <ctype.h>
-=======
 
->>>>>>> e99bd36e7bbb7ea73e42142da353f5e2e68946ba
 long hash(char *str){
     unsigned long hash = 5381;
     int c;
