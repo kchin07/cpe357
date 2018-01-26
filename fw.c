@@ -180,15 +180,12 @@ int main(int argc, char *argv[]){
 				perror("Error");
 			}
 		}
-	}
-<<<<<<< HEAD
-	
+	}	
 	/* TO DO: sort*/	
 	if(printFreq == 1){
 		printf("print %d words", printFreqNum);
 		/*TO DO: print n number of words*/
 	}
-=======
->>>>>>> e99bd36e7bbb7ea73e42142da353f5e2e68946ba
+
     return 0;
 }
