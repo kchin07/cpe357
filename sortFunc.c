@@ -2,7 +2,7 @@
  *  Sort function
  */
 
-int cmpr(void* a, void* b) {
+int cmproccur(void* a, void* b) {
    return (*(HashTable**)a)->occurrences - (*(HashTable**)b)-> occurrences;
 }
 

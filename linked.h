@@ -9,45 +9,9 @@ struct node {
    int occurrences;
    struct node* next;
 };
- typedef struct node hashnode;
+typedef struct node hashnode;
+extern hashnode* new_node(char* data, int num);
+extern hashnode* append(hashnode* one, hashnode* two);
+extern hashnode* search(hashnode* list, char* cword);
 
-
-hashnode* new_node(char* data, int num) {
-   hashnode* new;
-   new = malloc(sizeof(hashnode));
-   if (!new) {
-      perror("new_node");
-      exit(EXIT_FAILURE);
-   }
-   new -> word = data;
-   new -> occurrences = num;
-   new -> next = NULL;
-   return new;
-}
-
-hashnode* append(hashnode* one, hashnode* two) {
-   hashnode* end;
-   if (one != NULL) {
-      end = one;
-      printf("%s", end->word);
-      for (; end->next; end = end->next) {
-         /* do nothing */
-      }
-      end->next = two;
-   }
-   else {
-      one = two;
-   }
-   return one;
-}
-
-hashnode* search(hashnode* list, char* cword) {
-   hashnode* cur;
-   for (cur = list; cur -> next; cur = cur -> next) {
-      if (strcmp(cword, cur -> word) == 0) {
-         return  cur;
-      }
-   }
-   return NULL;
-}
 #endif
