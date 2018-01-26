@@ -4,16 +4,17 @@
 
 #define LISTH
 
-typedef struct node* node;
 struct node {
    char* word;
    int occurrences;
    struct node* next;
 };
+ typedef struct node hashnode;
 
-node* new_node(char* data, int num) {
-   struct node* new;
-   new = (struct node*)malloc(sizeof(struct node));
+
+hashnode* new_node(char* data, int num) {
+   hashnode* new;
+   new = malloc(sizeof(hashnode));
    if (!new) {
       perror("new_node");
       exit(EXIT_FAILURE);
@@ -21,18 +22,18 @@ node* new_node(char* data, int num) {
    new -> word = data;
    new -> occurrences = num;
    new -> next = NULL;
-   return (node*)new;
+   return new;
 }
 
-node* append(node* one, node* two) {
-   struct node* end;
+hashnode* append(hashnode* one, hashnode* two) {
+   hashnode* end;
    if (one != NULL) {
-      end =(struct node*)one;
+      end = one;
       printf("%s", end->word);
       for (; end->next; end = end->next) {
          /* do nothing */
       }
-      end->next = (struct node*)two;
+      end->next = two;
    }
    else {
       one = two;
@@ -40,11 +41,11 @@ node* append(node* one, node* two) {
    return one;
 }
 
-node* search(node* list, char* cword) {
-   struct node* cur;
-   for (cur = (struct node*)list; cur -> next; cur = cur -> next) {
+hashnode* search(hashnode* list, char* cword) {
+   hashnode* cur;
+   for (cur = list; cur -> next; cur = cur -> next) {
       if (strcmp(cword, cur -> word) == 0) {
-         return  (node*)cur;
+         return  cur;
       }
    }
    return NULL;

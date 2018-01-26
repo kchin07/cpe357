@@ -2,15 +2,18 @@
 #include <stdlib.h>
 #include "linked.h"
 
+//struct node hashnode;
+
 int main() {
-   node* list;
-   char* val = "hello";
-   node first = *new_node(val, 3);
+   hashnode* list;
+   char* val = "he";
+   hashnode* first = new_node(val, 3);
    char* val2 = "world";
-   node second = *new_node(val2, 4);
-   list = append((node*)first, (node*)second);
-   node* found = search(list, "world");
-   if (strcmp(((node)second)->word, ((node)found)->word) == 0) {
+   hashnode* second = new_node(val2, 4);
+   list = append(first, second);
+   hashnode* found = search(list, "world");
+   //printf("%s\n", found->word);
+   if (strcmp(second->word, found->word) == 0) {
       printf("looks good");
    }
    else {
