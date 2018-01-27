@@ -1,0 +1,7 @@
+cpe357-01
+asgn2
+1/26/18
+- names: Kyle Chin(kchin07), Rebecca Dong(Redong)
+- when doing stdin, we used "< [filename]"
+- we have warnings and we tried to get rid of them, but we were pressed for
+  time, so we submitted what we had.
