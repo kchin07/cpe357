@@ -107,7 +107,6 @@ HashTable* ht_create(int size){
 HashTable* ht_read_file(HashTable* ht, FILE* file){
    long index;/*unused*/
    char* temp;
-   char** words;
    int letterCounter;
    wordCount = 0;
    char c;
@@ -117,7 +116,6 @@ HashTable* ht_read_file(HashTable* ht, FILE* file){
    wordCount = 0;
    multiplier = 1;
    temp = (char*)malloc(80*sizeof(char));
-   words = (char**)malloc(4*sizeof(char));
 
    while (!feof(file)){
       c = getc(file);
@@ -191,33 +189,18 @@ HashTable* ht_read_file(HashTable* ht, FILE* file){
 
 int main(int argc, char *argv[]){
    FILE* file; 
-   int fileCounter;
+   int fileCounter = 1;
    int printFreq;
    int printFreqNum;
    int lastArg;
    int sLastArg;
    int hasn;
    int isdig;
+   HashTable* MainTable;
 	
    printFreq = 0;
    /*checks for file inputs*/
-   if (argc < 2) {
-      //printf("process file\n");
-   }
-   /*TO DO: process file*/
-   HashTable* MainTable;
-   long index;/*unused*/
-   char* temp;
-   char** words;
-   int letterCounter;
-   char c;
-   int multiplier;
-   letterCounter = 0;
-   //wordCount = 0;
-   multiplier = 1;
-   temp = (char*)malloc(10*sizeof(char));
-   words = (char**)malloc(4*sizeof(char));	
-     
+    
    MainTable = ht_create(HASHSIZE);
 
    printFreq = 0;
@@ -231,48 +214,51 @@ int main(int argc, char *argv[]){
       else{
          //printf("process file\n");
 	 /*TO DO: process file*/
+         ht_read_file(MainTable, file);
       }
    }
    //printf("about to read\n");
-   ht_read_file(MainTable, file);
+   //ht_read_file(MainTable, file);
    //printf("read file\n");
-   /*else if ((file =fopen(argv[1], "r")) == NULL){
-      perror("Error");
-      exit(EXIT_FAILURE);
-   }
-   else{*/
+
+   else{
       /*checks last and second to last arguments for -n <num>*/
       /*lastArg = strcmp(argv[argc-1], "-n");
       sLastArg = strcmp(argv[argc-2], "-n");
-      hasn = lastArg * sLastArg;
-      if(!hasn){ 
-         isdig = isdigit(*argv[argc-1]);
+      hasn = lastArg * sLastArg;*/
+      if(!strcmp(argv[1], "-n")){
+         if(argc < 3) {
+            perror("File not Found\n");
+            exit(EXIT_FAILURE);
+         } 
+         isdig = isdigit(*argv[2]);
          printFreq = 1;
          if(isdig){
-            printFreqNum = atoi(argv[argc-1]);
+            //printf("%s\n", argv[2]);
+            printFreqNum = atoi(argv[2]);
+            fileCounter = 3;
          }
          else{
 	    printFreqNum = 10;
+            fileCounter = 2;
          }
-      }*/
+         
+      }
       /*iterates through all the files in commandline*/
-      /*for(fileCounter = 1; fileCounter < argc; fileCounter++){
+      //printf("%d\n", argc);
+      for(; fileCounter < argc; fileCounter++){
          file = fopen(argv[fileCounter], "r");
 	 if(file != NULL){
-	  */ /*TO DO process file*/
-	/* }
+	   /*TO DO process file*/
+            ht_read_file(MainTable, file);
+	 }
 	 else{
+            printf("File Counter = %d\n", fileCounter);
 	    perror("Error");
 	 }
       }
-   }	*/
-   /* TO DO: sort*/	
-   /*if(printFreq == 1){
-      printf("print %d words", printFreqNum);
-    */  /*TO DO: print n number of words*/
-   //}
-   //
-   //printf("word count: %d\n", wordCount);
+   }	
+
    hashnode** numsort = malloc(wordCount*sizeof(hashnode));
    int i;
    int newIndex = 0;
@@ -284,17 +270,37 @@ int main(int argc, char *argv[]){
          //printf("sorting cur:  %s\n", cur->word);
          while(cur) {
             numsort[newIndex] = cur;
+            //printf("%s\n", numsort[newIndex]->word);
             cur = cur->next;
             newIndex++;
          }
       }
    }
-
-   qsort(numsort, wordCount, sizeof(numsort[0]), cmproccurr);
-   //qsort(numsort, wordCount,  
-   int j;
-   for (j=wordCount-1; j>= 0; j--) {
-      printf("Occurrences: %d | %s\n", numsort[j]->occurrences, numsort[j]->word);
+   
+   /*int g;
+   for (g=0; g<5;g++) {
+      printf("Occurrences: %d | %s\n", numsort[g]->occurrences, numsort[g]->word);
    }
+   printf("\n");
+   */
+   qsort(numsort, wordCount, sizeof(numsort[0]), cmproccurr); 
+
+   /*int f;
+   for (f=0; f<5;f++) {
+      printf("Occurrences: %d | %s\n", numsort[f]->occurrences, numsort[f]->word);
+   }
+   printf("\n");
+*/
+   /* TO DO: sort*/	
+   if(printFreq == 1){
+      //printf("print %d words", printFreqNum);
+      /*TO DO: print n number of words*/
+      int j;
+      for (j=wordCount-1; j>= wordCount-printFreqNum; j--) {
+         printf("Occurrences: %d | %s\n", numsort[j]->occurrences, numsort[j]->word);
+      }
+   }
+   //}
+   //
    return 0;
 }
